@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="row mt-5 pt-5">
+    <div class="col-md-12 text-center">
+      <p class="fs-1 text-white">Effettua l'accesso</p>
+    </div>
+    <div class="col-md-4 m-auto text-center border rounded mt-5 p-5 bg-light">
+      <div class="rounded-circle m-auto" style="height:100px;width:100px">
+      <img [src]="img" *ngIf="img2==''" alt="" class="w-100 rounded-circle border">
+      <img [src]="img2" *ngIf="img==''" alt="" class="w-100 rounded-circle border-fluo">
+    </div>
+      <form class="needs-validation mt-3" [formGroup]="form" (submit)="onSbmt()">
+        <div class="row text-center mt-3">
+          <div class="col-12">
+            <label
+              for="nome"
+              [ngClass]="{
+                'red-label': form.controls['email'].invalid,
+                'green-label': form.controls['email'].valid
+              }"
+              >Email:
+            </label>
+          </div>
+          <div class="col-12 pt-3">
+            <input
+              type="text"
+              formControlName="email"
+              class="form-control"
+              (input)="errs(form.controls['email'].value)"
+              placeholder="Inserisci l'email"
+              matTooltip="Inserisci l'email"
+              matTooltipPosition="before"
+            />
+          </div>
+          <div class="col-12 pt-3">
+            <label
+              for="password"
+              [ngClass]="{
+                'red-label': form.controls['password'].invalid,
+                'green-label': form.controls['password'].valid
+              }"
+              >Password:</label
+            >
+          </div>
+          <div class="col-12 pt-3">
+            <input
+              type="password"
+              formControlName="password"
+              class="form-control"
+              (input)="error=''"
+              placeholder="Inserisci la password"
+              matTooltip="Inserisci la password"
+              matTooltipPosition="above"
+            />
+          </div>
+          <p *ngIf="error != ''" class="text-danger pt-2">{{ error }}</p>
+          <button class="btn button m-auto mt-5" type="submit">
+            Accedi
+          </button>
+          <a routerLink="/signup" class="text-dark pt-3">Oppure registrati</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

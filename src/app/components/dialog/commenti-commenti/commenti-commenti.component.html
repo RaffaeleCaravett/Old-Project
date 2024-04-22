@@ -1,0 +1,88 @@
+<div mat-dialog-title class="w-50 m-auto">Commenti</div>
+<div mat-dialog-content class="p-3 overflow-auto" *ngIf="spinner==false">
+<div class="rounded p-2 " *ngIf="commentiArray.length!=0">
+  <div class="p-3">
+<div class="bg-personal m-2 border rounded p-2" *ngFor="let a of commentiArray" (mouseenter)="
+a.vediIterazioni=true;
+showLikes(a)
+"
+(mouseleave)="
+a.vediIterazioni=false;
+hideLikes()
+">
+  <div class="row">
+<div class="col-md-4">
+  <img  *ngIf="!a.storia||a.storia&&a.storia==false" src="{{a.immagine}}" alt="" class="width rounded-circle border">
+  <img  *ngIf="a.storia&&a.storia==true" src="{{a.immagine}}" alt="" class="width-fluo rounded-circle border">
+  <p>{{a.nome}}</p>
+</div>
+<div class="col-md-8 ">
+  <div class="row">
+    <div class="col-md-12 text-end">{{a.data}}</div>
+    <div class="col-md-12 d-flex justify-content-end" *ngIf="
+     data[0].id&&data[0].id  == a.id || data[0].idUtenteDelCommentoCondiviso&&data[0].idUtenteDelCommentoCondiviso == a.id
+    " ><p class="bg-white border rounded ">
+      Autore
+  </p></div>
+  </div>
+</div>
+<div class="col-md-12">
+  {{a.commento}}
+</div>
+<div class="col-md-12 d-flex justify-content-start" *ngIf="a.vediIterazioni == true">
+  <button
+  class="btn p-0 m-0" style="padding-right: 3px;"
+  *ngIf="isItLiked == false"
+  (click)="
+    isItLiked = true;
+    likeSound.play();
+    like(a)
+  "
+>
+  <mat-icon #icon1 class="text-danger wp"
+    >favorite_border</mat-icon
+  >
+</button>
+<button
+  class="btn p-0 m-0" style="padding-right: 3px;"
+  *ngIf="isItLiked == true"
+  (click)="
+    isItLiked = false;
+    likeSound.play();
+    dislike(a)
+  "
+>
+  <mat-icon #icon2 class="text-danger wp" color=""
+    >favorite</mat-icon
+  >
+</button>{{ perPerLikes }}
+<span *ngIf="perPerLikes == 1" (click)="goCheckIterations(realIterations)" class="border-end" style="padding-right: 3px;"> persona </span
+  ><span *ngIf="perPerLikes != 1" (click)="goCheckIterations(realIterations)" class="border-end" style="padding-right: 3px;"> persone </span>
+<span class="border-start" style="padding-left: 3px;" *ngIf="a.id  == utente.id ||
+a.id == utente.id">Elimina</span>
+</div>
+  </div>
+
+</div>
+  </div>
+</div>
+<div class="p-3" *ngIf="commentiArray.length==0">
+<p class="m-auto">Non ci sono commenti ancora. Commenta tu!</p>
+</div>
+</div>
+<mat-spinner *ngIf="spinner==true" class="m-auto"></mat-spinner>
+<div class="p-2 m-auto fixed-bottom" mat-dialog-actions>
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <div class="row" style="height: 80%;">
+      <div class="col-md-12"><label for="textareaField">Il tuo commento:</label></div>
+      <div class="col-md-12">
+        <textarea id="textareaField" formControlName="textareaField" class="form-control"></textarea>
+      <div *ngIf="myForm.get('textareaField').invalid && myForm.get('textareaField').touched">
+    <div *ngIf="myForm.get('textareaField').hasError('required')" class="text-danger">Non hai commentato!</div>
+      </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Commenta</button>
+  </form>
+</div>

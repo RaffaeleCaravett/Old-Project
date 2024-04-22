@@ -1,0 +1,14 @@
+<div style="height:100%;" class="w-100 bg-primary">
+<div class="text-center">
+  <h2 class="text-light">Le persone che hanno visualizzato la tua storia:</h2>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let d of data">
+      <div class="row">
+      <div class="col-md-3"><img src="{{d.avatar}}" alt="imgProfilo" class="rounded-circle ihih"> </div>
+      <div class="col-md-9">{{d.nome}} {{d.cognome}}</div>
+      </div>
+
+    </li>
+  </ul>
+</div>
+</div>

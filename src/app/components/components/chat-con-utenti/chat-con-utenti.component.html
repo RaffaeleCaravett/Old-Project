@@ -1,0 +1,60 @@
+<div style="height: 100%;" class="{{color}} {{text}}">
+<div class="row border p-3 rounded shadow-sm p-0 m-0  w-100">
+<div class="col-md-4">
+  <div class="col-md-12 p-3">
+    <h1 class="border-bottom p-2">I tuoi contatti</h1>
+      </div>
+      <div class="col-md-12" >
+<button class="btn {{text}}" (click)="richieste=!richieste">Con persone che non segui: ({{requests.length}})</button>
+      </div>
+      <div class="col-md-12 " *ngIf="richieste==true">
+        <div *ngIf="requests.length==0" class="pt-5 m-auto">
+Non ci sono richieste di messaggi al momento.
+        </div>
+        <div *ngIf="requests">
+          <div class="row p-2 " *ngFor="let r of requests" (click)="goChatPersonale(r)">
+            <div class="col-md-12">
+              <div class="row ">
+                <div class="col-md-4 pl-5">
+                  <img src="{{r.avatar}}" alt="imgProfilo" class="rounded-circle ">
+                </div>
+                <div class="col-md-8 align-middle">
+               <h2>{{r.nome}} {{r.cognome}}</h2>
+                </div>
+              </div>
+            </div>
+             </div>
+        </div>
+      </div>
+      <div class="col-md-12" *ngIf="richieste==false">
+ <div class="row p-2 " *ngFor="let personaCheSegui of personeCheSegui" (click)="goChatPersonale(personaCheSegui)">
+<div class="col-md-12">
+  <div class="row ">
+    <div class="col-md-4 pl-5">
+      <img src="{{personaCheSegui.avatar}}" alt="imgProfilo" class="rounded-circle ">
+    </div>
+    <div class="col-md-8 align-middle">
+   <h2>{{personaCheSegui.nome}} {{personaCheSegui.cognome}}</h2>
+    </div>
+  </div>
+</div>
+ </div>
+      </div>
+</div>
+<div class="col-md-8 position-relative">
+<div class="row ">
+  <div class="col-md-12 p-3">
+<h1 class="shadow-sm rounded p-2"  class="{{color}} {{text}}">La tua chat</h1>
+  </div>
+  <div class="col-md-12">
+<app-chat-con-utente *ngIf="chatPersonale=='yes'" [idUtente]="idPerDatiUtente" [datiUtenteDaContattare]="datiPerContatto"></app-chat-con-utente>
+  </div>
+  <div class="col-md-12 text-center position-absolute top-50 start-50 translate-middle" *ngIf="chatPersonale!='yes'">
+    <p>Clicca su un contatto per iniziare la conversazione</p>
+  </div>
+</div>
+</div>
+</div>
+
+
+</div>

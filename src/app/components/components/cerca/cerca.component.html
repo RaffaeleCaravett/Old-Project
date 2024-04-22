@@ -1,0 +1,26 @@
+<div class="col-md-12 pt-5 ">
+  <form class="example-full-width">
+
+    <div class="input-group mb-3">
+    <input class="form-control" [(ngModel)]="term" name="term" placeholder="cerca qualcuno ..." (focus)="openDiv()" (focusout)="openDiv()">
+    <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="openDiv()"><mat-icon>search</mat-icon></button>
+  </div>
+</form>
+
+<div class="pt-5 p-1 border rounded text-center h1 {{bg}} {{text}}" *ngIf="ricercaContatti">
+<div class="row p-2" *ngFor="let iscritto of iscritti | filter:term" (click)="goVisitUtente(iscritto)">
+<div class="col-md-4">
+  <div class="rounded-circle   m-auto" [ngClass]="{'stories': AreThereStories}" >
+
+    <img src="{{iscritto.avatar}}" alt="immagine_profilo" class="rounded-circle imgRicerca">
+
+
+  </div>
+</div>
+<div class="col-md-8">
+  <p class="fs-4" >{{iscritto.nome}} {{iscritto.cognome}}</p>
+</div>
+</div>
+
+</div>
+</div>

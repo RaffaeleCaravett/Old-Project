@@ -1,0 +1,25 @@
+
+  <div class="row p-0 m-0 ">
+    <div *ngIf="notifiche.length>0" class="p-0 m-0">
+      <ul class="w-100 p-1 m-0">
+        <li *ngFor="let n of notifiche" class="p-1">
+          <div class="row border rounded {{bg}} {{text}} p-1" style="min-width:90px">
+              <div class="col-xl-3">
+              <img src="{{n.da[0]}}" alt="">
+              </div>
+              <div class="col-xl-6 ">
+                <p class="fw-bold">{{n.da[1]}} {{n.da[2]}}</p>
+                <p class="fs" *ngIf="n.azione=='interazione'">ha messo mi piace al tuo post </p>
+                <p class="fs" *ngIf="n.azione=='commento'">ha commentato il tuo post </p>
+                <p class="fs" *ngIf="n.azione=='condivisione'">ha condiviso il tuo post  </p>
+              </div>
+              <div class="col-xl-3">
+                <img src="{{n.immagineCommento}}" alt="" *ngIf="n.immagineCommento" class="p-2 rounded">
+                <span *ngIf="n.immagineCommento==''">'{{n.titoloCommento||''}}'</span>
+              </div>
+            </div>
+        </li>
+      </ul>
+
+    </div>
+  </div>

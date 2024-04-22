@@ -1,0 +1,70 @@
+<mat-nav-list class="{{bg}} {{text}} p-2 pt-5" style="height: 100%" *ngIf="cerca==false&&notifics==false">
+  <h3 class="p-2 fst-italic"> Your Place</h3>
+<a mat-list-item *ngFor="let button of arraySideBarButtons" (click)="onChangeStr(button.value)">
+<div *ngIf="button.value!='Profilo'&&button.value!='Notifiche'&&button.icon!='invert_colors'"  class=" {{text}}">
+  <mat-icon  class="{{text}}" >{{button.icon}}</mat-icon> {{button.value}}
+</div>
+<div *ngIf="button.value!='Profilo'&&button.icon!='invert_colors'&&button.value=='Notifiche'&&notificheDaLeggere>0" class=" {{text}}">
+  <mat-icon  class="{{text}}" matBadge="{{notificheDaLeggere}}" matBadgeColor="warn">{{button.icon}}</mat-icon> {{button.value}}
+</div>
+<div *ngIf="button.value!='Profilo'&&button.icon!='invert_colors'&&button.value=='Notifiche'&&notificheDaLeggere==0" class=" {{text}}">
+  <mat-icon class="{{text}}" >{{button.icon}}</mat-icon> {{button.value}}
+</div>
+<div *ngIf="button.value=='Profilo'" class=" {{text}}" >
+  <img src="{{imgUtente}}" alt="Immagine_profilo" class="imgRicerca rounded-circle"> {{button.value}}
+</div>
+<div *ngIf="button.icon=='invert_colors'"  class=" {{text}}">
+  <mat-icon  class="{{text}}">{{button.icon}}</mat-icon> <mat-slide-toggle class="pl-2" style="position: relative;top:-5px" (change)="onChangeToggle($event)"
+  [color]="'warn'"></mat-slide-toggle>
+</div>
+</a>
+</mat-nav-list>
+<mat-nav-list *ngIf="cerca==true&&notifics==false" class="{{bg}} {{text}} p-2 pt-5" style="height: 100%" >
+  <h3 class="p-3"><mat-icon class="{{text}}">castle</mat-icon> </h3>
+ <div class="row">
+  <div class="col-3">
+    <a mat-list-item *ngFor="let button of arraySideBarButtons"  (click)="onChangeStr(button.value)">
+      <div *ngIf="button.value!='Profilo'&&button.value!='Notifiche'" >
+        <mat-icon  class="{{text}}">{{button.icon}}</mat-icon>
+      </div>
+      <div *ngIf="button.value!='Profilo'&&button.value=='Notifiche'&&notificheDaLeggere>0">
+        <mat-icon  class="{{text}}" matBadge="{{notificheDaLeggere}}" matBadgeColor="warn">{{button.icon}}</mat-icon>
+      </div>
+      <div *ngIf="button.value!='Profilo'&&button.value=='Notifiche'&&notificheDaLeggere==0">
+  <mat-icon  class="{{text}}">{{button.icon}}</mat-icon> {{button.value}}
+</div>
+      <div *ngIf="button.value=='Profilo'" >
+        <img src="{{imgUtente}}" alt="Immagine_profilo" class="imgRicerca rounded-circle">
+      </div>
+    </a>
+
+  </div>
+
+<div class="col-9">
+  <app-cerca  (idKeyDaVisitare)="onReceiveIdKeyDaVisitare($event)" (idKeyDiChiVisita)="onReceiveIdKeyDiChiVisita($event)" (profile)="onChangeStr($event)"
+   (visit)="onReceiveVisit($event)" [bg]="bg" [text]="text"></app-cerca>
+</div>
+ </div>
+
+</mat-nav-list>
+<mat-nav-list *ngIf="notifics==true&&cerca==false" class="{{bg}} {{text}} p-2 pt-5" style="height: 100%" >
+  <h3 class="p-3"><mat-icon class="{{text}}">castle</mat-icon> </h3>
+ <div class="row">
+  <div class="col-3">
+    <a mat-list-item *ngFor="let button of arraySideBarButtons" (click)="onChangeStr(button.value)">
+      <div *ngIf="button.value!='Profilo'" >
+        <mat-icon  class="{{text}}">{{button.icon}}</mat-icon>
+      </div>
+      <div *ngIf="button.value=='Profilo'" >
+        <img src="{{imgUtente}}" alt="Immagine_profilo" class="imgRicerca rounded-circle">
+      </div>
+    </a>
+
+  </div>
+
+<div class="col-9">
+  <app-notifiche  [notifiche]="notifiche" [notificheDaLeggere]="notificheDaLeggere" [notificheLette]="notificheLette" [utente]="utente" [bg]="bg" [text]="text"></app-notifiche>
+</div>
+ </div>
+
+</mat-nav-list>

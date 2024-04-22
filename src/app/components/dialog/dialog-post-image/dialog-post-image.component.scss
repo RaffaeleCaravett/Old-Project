@@ -1,0 +1,34 @@
+::ng-deep.form-control{
+  border: none;
+&:focus {
+  border: none;
+  box-shadow: 0 0 0 0 white;
+}
+}
+.m-auto{
+  width:450px;
+}
+.immagine-postata{
+  width: 450px;
+  height: 450px;
+}
+.parent {
+  position: relative;
+  width: 450px;
+  height: 450px;
+}
+.draggable {
+  position: absolute;
+  max-width: 100%;
+  max-height: 100%;
+  cursor: move;
+}
+.row{
+  width: 450px;
+}
+button.bt{
+    border: none;
+    background: transparent;
+    position: relative;
+    top: -8px;
+}

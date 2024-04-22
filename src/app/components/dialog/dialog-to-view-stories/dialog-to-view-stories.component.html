@@ -1,0 +1,52 @@
+<div class="bg-primary position-relative" style="height: 90%;" *ngIf="!data.data[count].file">
+  <div class="text-center " mat-dialog-title></div>
+<div mat-dialog-content class="text-center position-absolute top-50 start-50 translate-middle fs-2 text-light w-100">
+  <div class="row ">
+    <div class="col-md-2 position-absolute top-50 start-0 translate-middle-y"><button class="btn text-light" (click)="countLess()"><i class="material-icons">chevron_left</i></button></div>
+<div class="col-md-8 w90 m-auto">
+
+    {{data.data[count].titolo}}
+  </div>
+
+<div class="col-md-2 position-absolute top-50 end-0 translate-middle-y"><button class="btn text-light" (click)="countMore()"><i class="material-icons">chevron_right</i></button></div>
+  </div>
+
+</div>
+
+</div>
+<div mat-dialog-actions class="bg-primary" *ngIf="!data.data[count].file">
+  <div *ngIf="utentiCheHannoVistoQuestaStoria">
+  <div  class="bg-primary" *ngIf="utentiCheHannoVistoQuestaStoria.length==1"><button class="btn text-light" (click)="openDialoggg()">visualizzato da {{utentiCheHannoVistoQuestaStoria.length}} persona</button>
+ </div>
+ <div  class="bg-primary" *ngIf="utentiCheHannoVistoQuestaStoria.length>1"><button class="btn text-light" (click)="openDialoggg()" >visualizzato da {{utentiCheHannoVistoQuestaStoria.length}} persone</button>
+ </div>
+</div>
+
+</div>
+
+<div class="bg-primary position-relative" style="height: 100%;" *ngIf="data?.data[count].file">
+
+<mat-dialog-content class="text-center position-absolute top-50 start-50 translate-middle fs-2 text-light w-100">
+  <div class="col-md-12 text-center text-light">{{data?.data[count].titolo}}</div>
+  <div class="row ">
+    <div class="col-md-2 position-absolute top-50 start-0 translate-middle-y"><button class="btn text-light" (click)="countLess()"><i class="material-icons">chevron_left</i></button></div>
+<div class="col-md-8 m-auto" >
+  <img src="{{data.data[count].file}}" alt="imgStoria" style="max-width: 100%; max-height: 90%;"></div>
+
+<div class="col-md-2 position-absolute top-50 end-0 translate-middle-y"><button class="btn text-light" (click)="countMore()"><i class="material-icons">chevron_right</i></button></div>
+  </div>
+
+</mat-dialog-content>
+</div>
+<div mat-dialog-actions class="bg-primary position-relative" *ngIf="data?.data[count].file">
+
+<div *ngIf="utentiCheHannoVistoQuestaStoria" class="position-absolute bottom-0 start-50 translate-middle-x">
+  <div  class="bg-primary" *ngIf="utentiCheHannoVistoQuestaStoria.length==1"><button class="btn text-light" (click)="openDialoggg()">visualizzato da {{utentiCheHannoVistoQuestaStoria.length}} persona</button>
+ </div>
+ <div  class="bg-primary" *ngIf="utentiCheHannoVistoQuestaStoria.length>1"><button class="btn text-light" (click)="openDialoggg()" >visualizzato da {{utentiCheHannoVistoQuestaStoria.length}} persone</button>
+ </div>
+</div>
+</div>
+
+
+

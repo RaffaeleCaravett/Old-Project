@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 m-auto p-3">
+      <div *ngFor="let song of songs" class="d-flex justify-content-between">
+        <img src="../../../../assets/musica/25705.svg" alt="note_music" class="border rounded shadow-sm" style="width:25px;height:25px" [mat-dialog-close]="song">
+        <span  [mat-dialog-close]="song" class="p-1">{{song.name}}</span>
+    <audio controls class="p-2 d-none" [src]="song.sound" #audio></audio>
+    <i class="material-icons" *ngIf="audio.paused" (click)="audio.play()">play_circle_outline</i>
+    <i class="material-icons" *ngIf="!audio.paused" (click)="audio.pause()">pause_circle_outline</i>
+      </div>
+    </div>
+  </div>
+</div>

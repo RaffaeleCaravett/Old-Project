@@ -1,0 +1,66 @@
+<div mat-dialog-container (mouseleave)="toClose.close()" (mouseenter)="close=true" style="height:100%">
+  <div *ngIf="postsArray&&postsArray.length!=0">
+<div mat-dialog-title (click)="toClose.close(user)">
+  <img src="{{user?.avatar}}" alt="img_profilo" class="img rounded-circle border"
+  *ngIf="!postsArray||postsArray&&postsArray[0].storia==false"
+  >
+  <img src="{{user?.avatar}}" alt="img_profilo" class="stories rounded-circle"
+  *ngIf="postsArray&&postsArray[0].storia==true"
+  >
+ <span class="p-2">{{user?.nome}} {{user?.cognome}}</span>
+</div>
+<div mat-dialog-content>
+  <div class="row">
+    <div class="col-md-12 height" >
+      <div class="row p-1 text-center">
+        <div class="col-md-4">Segue:{{data[1].length}}</div>
+        <div class="col-md-4">Seguito da:{{data[2].length}}</div>
+        <div class="col-md-4">Interazioni:{{data[0].length}}</div>
+      </div>
+    </div>
+    <div class="col-md-4 p-0" *ngFor="let commentoPersonale of postsArray">
+      <div class="position-relative img-postata m-auto text-white">
+        <img
+          src="{{ commentoPersonale.immaginePostata }}"
+          alt="immagine postata"
+          class="img-postata rounded border"
+        />
+        <div
+          class="position-absolute top-0 start-0 w-100 row fs"
+          *ngIf="
+            commentoPersonale.immagineDelCommentoCondiviso != '' &&
+            commentoPersonale.immagineDelCommentoCondiviso != null
+          "
+        >
+          <div class="col-md-3 ">
+            <i class="material-icons" style="font-size:12px;">share</i>
+            <img
+              src="{{ commentoPersonale.immagineDelCommentoCondiviso }}"
+              alt="img"
+              style="width: 15px; height: 15px"
+              class="border border-dark rounded-circle"
+            />
+          </div>
+          <div class="col-md-9 fw-bold text-start">
+            <p>{{ commentoPersonale.nomeDelCommentoCondiviso }}</p>
+            <p>{{ commentoPersonale.dataDelCommentoCondiviso }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div *ngIf="postsArray&&postsArray.length==0">
+  <div mat-dialog-title (click)="toClose.close(user)">
+    <img src="{{user?.avatar}}" alt="img_profilo" class="rounded-circle border">
+   <span class="p-2">{{user?.nome}} {{user?.cognome}}</span>
+  </div>
+  <div mat-dialog-content style="height:260px;" class="mt-5">
+  <p>
+    L'utente non ha ancora postato niente.
+  </p>
+  </div>
+</div>
+</div>
+

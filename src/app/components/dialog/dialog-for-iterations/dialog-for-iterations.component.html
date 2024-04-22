@@ -1,0 +1,14 @@
+<div class="p-0 m-0" *ngIf="showButtons==true" >
+<div mat-dialog-title class="text-center border-bottom"> <h3>Iterazioni</h3> <mat-icon class="position-absolute top-0 end-0" [mat-dialog-close]="undefined">close</mat-icon></div>
+<div mat-dialog-content>
+  <div class="row p-1 text-center m-auto" *ngFor="let d of arrayToUseInHtml">
+      <div class="col-2 rounded-circle"> <img src="{{d.avatar}}" alt="img_profilo" class="rounded-circle imgProfilo" (mouseenter)="tryToOpenThisDialog($event,d)"></div>
+       <div class="col-5">{{d.nomeUtente}}
+       </div>
+       <div class="col-5">
+        <button class="btn btn-primary" (click)="segui(d)" *ngIf="data[1].id!=d.utenteCheMetteLike&&!d.seguito">Segui</button>
+        <button class="btn btn-primary" (click)="segui(d)" *ngIf="d.seguito">Non seguire più</button>
+       </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,199 @@
+<div class="container">
+  <div class="row">
+    <div class="mt-5 text-center">
+  <div class="mt-5">
+    <p class="fs-1 text-white">Effettua la registrazione</p>
+    <div class="col-md-7 m-auto border rounded bg-light mt-5 p-4">
+     <form class="p-5 needs-validation text-center" [formGroup]="form"  (submit)="onSbmt()">
+      <div class="row text-center" *ngIf="step1">
+        <div class="col-3">
+         <label for="nome" [ngClass]="{'red-label':form.controls['nome'].invalid,'green-label':form.controls['nome'].valid}">*Nome: </label>
+        </div>
+        <div class="col-9">
+      <input type="text" formControlName="nome" class="form-control"  placeholder="Inserisci il nome" matTooltip="Inserisci il nome" matTooltipPosition="before" >
+        </div>
+<div class="col-3 pt-3">
+<label for="cognome" [ngClass]="{'red-label':form.controls['cognome'].invalid,'green-label':form.controls['cognome'].valid}">*Cognome:</label>
+</div>
+<div class="col-9 pt-3">
+      <input type="text" formControlName="cognome" class="form-control" placeholder="Inserisci il cognome"  matTooltip="Inserisci il cognome" matTooltipPosition="above" >
+</div>
+<div class="col-3 pt-3">
+      <label for="email" [ngClass]="{'red-label':form.controls['email'].invalid,'green-label':form.controls['email'].valid}">*Email:</label>
+</div>
+<div class="col-9 pt-3">
+      <input type="email" formControlName="email" class="form-control" placeholder="Inserisci la tua email" matTooltip="Inserisci l'email" matTooltipPosition="after" >
+</div>
+<div class="col-3 pt-3">
+        <label for="dataDiNascita" [ngClass]="{'red-label':form.controls['dataDiNascita'].invalid,'green-label':form.controls['dataDiNascita'].valid}"
+
+        >*Data di nascita:</label>
+</div>
+<div class="col-9 pt-3">
+        <input type="date" formControlName="dataDiNascita" class="form-control" [max]="getTodayDate()" placeholder="Inserisci la data di nascita"  matTooltip="Inserisci la data di nascita" matTooltipPosition="below" >
+</div>
+<div class="col-3 pt-3">
+      <label for="luogoDiNascita" [ngClass]="{'red-label':form.controls['luogoDiNascita'].invalid,'green-label':form.controls['luogoDiNascita'].valid}">*Luogo di nascita:</label>
+</div>
+<div class="col-9 pt-3">
+      <input type="text" formControlName="luogoDiNascita" class="form-control" placeholder="Inserisci il luogo di nascita" matTooltip="Inserisci il luogo di nascita" matTooltipPosition="before" >
+</div>
+<div class="pt-3 text-center">
+   <button class="btn m-3" type="button" (click)="avanti()"> <mat-icon class="pt-1">arrow_forward</mat-icon></button>
+      <p class="pt-3"><a class="text-dark pt-2" routerLink="/login">Oppure accedi</a></p>
+</div>
+      </div>
+      <div *ngIf="step2" class="row text-center">
+        <div class="col-3">
+          <label for="nome" [ngClass]="{'red-label':form.controls['sesso'].invalid,'green-label':form.controls['sesso'].valid}">*Sesso: </label>
+         </div>
+         <div class="col-9">
+          <div class="row form-check">
+          <div class="col-12">
+            <div class="row">
+                      <div class="col-6">
+              <label for="sessoM" [ngClass]="{'red-label':form.controls['sesso'].invalid,'green-label':form.controls['sesso'].valid}" class="form-check-label">Maschio:</label>
+            </div>
+            <div class="col-6">
+                     <input type="radio" formControlName="sesso" id="sessoM" value="M" class="form-check-input"   matTooltip="Maschio" matTooltipPosition="before" >
+            </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="row">
+              <div class="col-6">
+              <label for="sessoF" [ngClass]="{'red-label':form.controls['sesso'].invalid,'green-label':form.controls['sesso'].valid}" class="form-check-label">Femmina:</label>
+            </div>
+            <div class="col-6">
+                    <input type="radio" formControlName="sesso" id="sessoF" value="F" class="form-check-input"   matTooltip="Femmina" matTooltipPosition="before" >
+            </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="row">
+               <div class="col-6">
+          <label for="sessoT" [ngClass]="{'red-label':form.controls['sesso'].invalid,'green-label':form.controls['sesso'].valid}" class="form-check-label">Trans:</label>
+         </div>
+         <div class="col-6">
+                 <input type="radio" formControlName="sesso" id="sessoT" value="Trans" class="form-check-input"   matTooltip="Trans" matTooltipPosition="before" >
+         </div>
+            </div>
+          </div>
+          </div>
+         </div>
+ <div class="col-3 pt-3">
+ <label for="interess" [ngClass]="{'red-label':form.controls['interessi'].invalid,'green-label':form.controls['interessi'].valid}">*Interessi:</label>
+ </div>
+ <div class="col-9 pt-3">
+       <input type="text" formControlName="interessi" class="form-control" placeholder="Inserigli i tuoi interessi"  matTooltip="Inserisci i tuoi interessi" matTooltipPosition="above" >
+ </div>
+ <div class="col-3 pt-3">
+         <label for="professione" [ngClass]="{'red-label':form.controls['professione'].invalid,'green-label':form.controls['professione'].valid}">*Professione:</label>
+ </div>
+ <div class="col-9 pt-3">
+         <input type="text" formControlName="professione" class="form-control"  placeholder="Inserisci la tua professione"  matTooltip="Inserisci la tua professione" matTooltipPosition="below" >
+ </div>
+ <div class="col-3 pt-3">
+       <label for="stato" [ngClass]="{'red-label':form.controls['stato'].invalid,'green-label':form.controls['stato'].valid}">*Stato:</label>
+ </div>
+ <div class="col-9 pt-3">
+  <select type="text" formControlName="stato" class="form-select" placeholder="Inserisci il tuo stato" matTooltip="Inserisci il tuo stato" matTooltipPosition="after" >
+    <option value=""></option>
+    <option *ngFor="let stato of stati" value="{{stato}}">{{stato}}</option>
+    </select>
+ </div>
+ <div class="col-3 pt-3">
+       <label for="password" [ngClass]="{'red-label':form.controls['password'].invalid,'green-label':form.controls['password'].valid}">*Password:</label>
+ </div>
+ <div class="col-9 pt-3">
+       <input type="password" formControlName="password" class="form-control {{class}}" placeholder="Inserisci la tua password" matTooltip="Inserisci la password" matTooltipPosition="before"
+      (input)="checkPassword(form.controls['password'].value,form.controls['passwordCheck'].value)">
+ </div>
+ <div class="col-3 pt-3">
+  <label for="password1" [ngClass]="{'red-label':form.controls['password'].invalid,'green-label':form.controls['password'].valid}">*Ripeti la password:</label>
+</div>
+<div class="col-9 pt-3">
+  <input type="password" id="password1" formControlName="passwordCheck" class="form-control {{class}}" placeholder="Inserisci la tua password" matTooltip="Inserisci la password" matTooltipPosition="before"
+   (input)="checkPassword(form.controls['passwordCheck'].value,form.controls['password'].value)">
+</div>
+ <div class="pt-3 text-center">
+ <button class="btn m-3" type="button" (click)="indietro()"><mat-icon class="pt-1">arrow_back</mat-icon> </button>
+      <button class="btn m-3" type="button" (click)="avanti()" (click)="message()" >  <mat-icon class="pt-1">arrow_forward</mat-icon></button>
+      <p class="pt-3"><a class="text-dark " routerLink="/login">Oppure accedi</a></p>
+ </div>
+
+      </div>
+      <div *ngIf="step3" class="row text-center">
+          <div class="col-12">
+            <div class="row" *ngIf="form.value.sesso && form.value.sesso=='M'">
+              <div class="col-xl-6 p-1" *ngFor="let maleAvatar of maleAvatars"><img src="{{maleAvatar}}" class="rounded-circle" alt="immagine di un avatar maschio">
+              <input type="radio" value="{{maleAvatar}}" (change)="variableImg=null" formControlName="avatar" class="form-check-input" matTooltip="Scegli un avatar" matTooltipPosition="before" >
+              </div>
+                <div class="col-xl-6 p-1" *ngIf="!variableImg">
+                <div class="rounded-circle  m-auto position-absolute">
+                  <button class="btn position-absolute top-50 start-50 translate-middle" (click)="form.controls['avatar'].setValue(null);file.click()" type="button" > <i class="material-icons text-primary">add</i></button>
+                </div>
+              </div>
+              <div class="col-xl-6 p-1">
+                <img *ngIf="variableImg" src="{{variableImg}}" alt="imgCaricata" class="rounded-circle width">
+                <input type="file"  class="d-none" (change)="viewFileValue($event)" #file formControlName="immagineCaricata" accept="image/png, image/gif, image/jpeg">
+    <div class="col-md-12 p-1">
+      <button class="btn" *ngIf="variableImg" (click)="variableImg=null" type="button"> <i class="material-icons text-danger" style="width:20px">delete</i></button>
+    </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="form.value.sesso && form.value.sesso=='F'">
+              <div class="col-xl-6 p-1" *ngFor="let femaleAvatar of femaleAvatars">
+                <img src="{{femaleAvatar}}" class="rounded-circle" alt="immagine di un avatar femmina">
+                <input type="radio" value="{{femaleAvatar}}" (change)="variableImg=null" formControlName="avatar" class="form-check-input" matTooltip="Scegli un avatar" matTooltipPosition="before" >
+              </div>
+              <div class="col-xl-6 p-1" *ngIf="!variableImg">
+                <div class="rounded-circle  m-auto position-absolute">
+                  <button class="btn position-absolute top-50 start-50 translate-middle" (click)="form.controls['avatar'].setValue(null);file.click()" type="button"> <i class="material-icons text-primary">add</i></button>
+                </div>
+              </div>
+              <div class="col-xl-6 p-1">
+                <img *ngIf="variableImg" src="{{variableImg}}" alt="imgCaricata" class="rounded-circle width">
+                <input type="file"  class="d-none" (change)="form.controls['avatar'].setValue(null);viewFileValue($event)" #file formControlName="immagineCaricata" accept="image/png, image/gif, image/jpeg">
+    <div class="col-md-12 p-1">
+      <button class="btn" *ngIf="variableImg" (click)="variableImg=null" type="button"> <i class="material-icons text-danger" style="width:20px">delete</i></button>
+    </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="form.value.sesso && form.value.sesso=='Trans'">
+              <div class="col-xl-6 p-1" *ngFor="let transAvatar of transAvatars">
+                <img src="{{transAvatar}}" class="rounded-circle" alt="immagine di un avatar transgender">
+                <input type="radio" value="{{transAvatar}}" (change)="variableImg=null" formControlName="avatar" class="form-check-input" matTooltip="Scegli un avatar" matTooltipPosition="before" >
+              </div>
+              <div class="col-xl-6 p-1" *ngIf="!variableImg">
+                <div class="rounded-circle  m-auto position-absolute">
+                  <button class="btn position-absolute top-50 start-50 translate-middle" (click)="form.controls['avatar'].setValue(null);file.click()" type="button" *ngIf="!variableImg">
+                    <i class="material-icons text-primary">add</i></button>
+                </div>
+              </div>
+              <div class="col-xl-6 p-1">
+                <img *ngIf="variableImg" src="{{variableImg}}" alt="imgCaricata" class="rounded-circle width">
+                <input type="file"  class="d-none" (change)="form.controls['avatar'].setValue(null);viewFileValue($event)" #file formControlName="immagineCaricata" accept="image/png, image/gif, image/jpeg">
+    <div class="col-md-12 p-1">
+      <button class="btn" *ngIf="variableImg" (click)="variableImg=null" type="button"> <i class="material-icons text-danger" style="width:20px">delete</i></button>
+    </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+          </div>
+          <div class="pt-3 text-center">
+       <button class="btn m-3" type="button" (click)="indietro()"><mat-icon class="pt-1">arrow_back</mat-icon> </button>
+        <button class="btn m-3" type="submit">  <mat-icon class="pt-1">arrow_forward</mat-icon></button>
+        <p class="pt-3"><a class="text-dark " routerLink="/login">Oppure accedi</a></p>
+          </div>
+      </div>
+    </form>
+    </div>
+  </div>
+    </div>
+  </div>
+</div>
+
+
+

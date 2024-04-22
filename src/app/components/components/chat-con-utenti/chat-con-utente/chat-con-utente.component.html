@@ -1,0 +1,35 @@
+  <div class="row row1 overflow-scroll" *ngIf="arrayPerChat">
+    <div *ngFor="let chat of arrayPerChat">
+  <div *ngIf="chat.id1==idUtente&&chat.email2==datiUtenteDaContattare.email"  class="col-md-12" >
+    <div class="col-md-12 d-flex justify-content-end fw-bolder">Hai scritto:</div>
+  <div class="col-md-12 d-flex justify-content-end p-2">
+{{chat.messaggio}}
+  </div>
+  </div>
+
+  <div class="p-2"></div>
+  <div *ngIf="chat.email2==utente.email&&chat.id1==idDaUsare" class="col-md-12" >
+    <div class="col-md-12 d-flex justify-content-start fw-bolder">{{datiUtenteDaContattare.nome}} ha scritto:</div>
+  <div class="col-md-12 d-flex justify-content-start p-2">
+{{chat.messaggio}}
+  </div>
+  </div>
+</div>
+  <div class="col-md-12 position-absolute bottom-0 start-50 translate-middle-x p-2">
+    <div class="row">
+<form [formGroup]="chatForm" (ngSubmit)="submitChat()">
+      <textarea class="form-control" formControlName="messaggio"  placeholder="Scrivi un messaggio"></textarea>
+ <div class="col-md-12 d-flex justify-content-end p-2">
+      <button class="btn btn-primary" type="submit">Invia</button>
+    </div>
+    </form>
+
+    </div>
+
+
+  </div>
+
+
+
+</div>
+

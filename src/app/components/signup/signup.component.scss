@@ -1,0 +1,95 @@
+.btn{
+  width:30%;
+}
+a{
+  text-decoration: none;
+}
+.ng-submitted{
+  .ng-invalid{
+    border:1px solid red
+  }
+  .ng-valid{
+border: 2px solid green;
+  }
+  .red-label{
+color:red;
+font-weight: bold;
+  }
+  .green-label{
+    color: green;
+    font-weight: bold;
+  }
+
+  }
+ .width{
+    width:232px;
+    height: 232px;
+  }
+
+    div.position-absolute{
+  width:225px;
+  height:225px
+}
+
+img.rounded-circle{
+  min-width:225px;
+  min-height:225px
+}
+.col-md-7{
+  -webkit-box-shadow: 3px 3px 3px 3px #0d6efd;
+  -moz-box-shadow: 3px 3px 3px 3px #0d6efd;
+  box-shadow: 0 0 .1rem #fff,
+          0 0 .1rem #fff,
+          0 0 1rem #0d6efd,
+          0 0 0.5rem #0d6efd,
+          0 0 2rem #0d6efd,
+          inset 0 0 1rem #0d6efd;
+}
+.fs-1{
+  text-shadow:#0d6efd 1px 0 10px;
+}
+.text-white{
+  text-shadow:#0d6efd 1px 0 10px;
+}
+.form-control{
+  border:none;
+  border-bottom: 1px solid #0d6efd;
+   &:focus{
+   box-shadow: none;
+   }
+}
+button {
+  display: inline-block;
+  color: #0d6efd;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0 0 15px #0d6efd;
+}
+
+/*creating animation effect*/
+button:hover {
+  color: white;
+  background: #0d6efd;
+  box-shadow: 0 0 20px white;
+}
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn.focus:active, .btn:active:focus, .btn:focus {
+box-shadow: none;
+}
+.parent {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  background-color: lightgray;
+  padding: 20px;
+}
+
+.draggable {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-color: dodgerblue;
+  cursor: move;
+}

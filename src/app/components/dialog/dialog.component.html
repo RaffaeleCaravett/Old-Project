@@ -1,0 +1,70 @@
+<div *ngIf="data&&data[0]!='errore'">
+<h1 mat-dialog-title class="text-center" *ngIf="!data[1]">Stai condividendo questo post</h1>
+<h1 mat-dialog-title class="text-center" *ngIf="data[1]&&data[1]=='modifica'">Stai modificando questo post</h1>
+<h1 mat-dialog-title class="text-center" *ngIf="data[1]&&data[1]=='elimina'">Stai eliminando questo post</h1>
+<div mat-dialog-content>
+  <div class="text-center">
+  <div class="col-md-12" >
+    <div class="row p-0">
+      <div class="col-md-3 d-flex justify-content-end">
+      <img src="{{data.immagine||data.immagineDelCommentoCondiviso||data[0].immagine||data[0].immagineDelCommentoCondiviso}}"  alt="immagine profilo" class="immagine-rounded-circle rounded-circle">
+      </div>
+      <div class="col-8 p-0 m-0 d-flex justify-content-start">
+        <div class="row p-0 m-0">
+          <div class="col-md-12 d-flex justify-content-start">
+            <p class="fs-7" *ngIf="data.nomeDelCommentoCondiviso||data[0]">
+              {{ data.nomeDelCommentoCondiviso ||data[0].nomeDelCommentoCondiviso}}
+            </p>
+            <p class="fs-7" *ngIf="data.nome||data[0]">
+              {{ data.nome||data[0].nome }}
+              {{ data.cognome ||data[0].cognome}}
+            </p>
+          </div>
+          <div class="col-md-12 d-flex justify-content-start mb-1">
+            <p class="data">
+              {{
+                data.dataDelCommentoCondiviso ||
+                  data.data||data[0].dataDelCommentoCondiviso ||
+                  data[0].data
+              }}
+              <i class="material-icons text-danger">date_range</i>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+       {{data.commento}}
+    </div>
+    <div class="col-md-12">
+      <img src="{{data.immaginePostata||data[0].immaginePostata}}" alt="imgPostata" class="rounded m-auto width">
+    </div>
+  </div>
+</div>
+<div class="col-md-12">
+  <input class="form-control" placeholder="{{'Scrivi qualcosa'}}" [(ngModel)]="data.title" *ngIf="!data[0]">
+  <input class="form-control" placeholder="{{data[0].titolo||data[0].commento}}" [(ngModel)]="data.title" *ngIf="data[0]">
+</div>
+</div>
+<div mat-dialog-actions class="d-flex justify-content-end">
+  <button mat-button (click)="onNoClick('blabla')">Annulla</button>
+  <button mat-button (click)="onNoClick(data.title)" cdkFocusInitial *ngIf="!data[1]">Condividi</button>
+  <button mat-button (click)="onNoClick(data.title)" cdkFocusInitial *ngIf="data[1]&&data[1]=='modifica'">Modifica</button>
+  <button mat-button (click)="onNoClick('elimina')" cdkFocusInitial *ngIf="data[1]&&data[1]=='elimina'">Elimina</button>
+</div>
+</div>
+<div *ngIf="data[0]=='errore'">
+
+    <h1 mat-dialog-title class="text-center bg-primary text-white">Attenzione <i class="material-icons text-warning">warning_amber</i></h1>
+    <div mat-dialog-content style="height: 260px;padding-top: 28%;">
+    <p>{{data[1]}}</p>
+    </div>
+
+    <div mat-dialog-actions class="d-flex justify-content-end">
+      <button mat-button (click)="onNoClick('blabla')">Capito</button>
+    </div>
+</div>
+
+

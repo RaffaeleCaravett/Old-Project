@@ -1,0 +1,91 @@
+<div mat-dialog-title class="w-50 m-auto">Commenti</div>
+<div mat-dialog-content class="p-3 overflow-auto" *ngIf="spinner==false">
+<div class="rounded p-2 " *ngIf="commentiArray.length!=0">
+  <div class="p-3">
+<div class="bg-personal m-2 border rounded p-2" *ngFor="let a of commentiArray" (mouseenter)="
+a.vediIterazioni=true;
+showLikes(a)
+"
+(mouseleave)="
+a.vediIterazioni=false;
+hideLikes()
+">
+  <div class="row">
+<div class="col-md-4">
+  <img  *ngIf="!a.storia||a.storia&&a.storia==false" src="{{a.immagine}}" alt="" class="width rounded-circle border">
+  <img  *ngIf="a.storia&&a.storia==true" src="{{a.immagine}}" alt="" class="width-fluo rounded-circle border">
+  <p>{{a.nome}}</p>
+</div>
+<div class="col-md-8 ">
+  <div class="row">
+    <div class="col-md-12 text-end">{{a.data}}</div>
+    <div class="col-md-12 d-flex justify-content-end" *ngIf="
+     data[0].id&&data[0].id  == a.id || data[0].idUtenteDelCommentoCondiviso&&data[0].idUtenteDelCommentoCondiviso == a.id
+    " ><p class="bg-white border rounded ">
+      Autore
+  </p></div>
+  </div>
+</div>
+<div class="col-md-12">
+  {{a.commento}}
+</div>
+<div class="col-md-12 d-flex justify-content-start" *ngIf="a.vediIterazioni == true">
+  <button
+  class="btn p-0 m-0" style="padding-right: 3px;"
+  *ngIf="isItLiked == false"
+  (click)="
+    isItLiked = true;
+    likeSound.play();
+    like(a)
+  "
+>
+  <mat-icon #icon1 class="text-danger wp"
+    >favorite_border</mat-icon
+  >
+</button>
+<button
+  class="btn p-0 m-0" style="padding-right: 3px;"
+  *ngIf="isItLiked == true"
+  (click)="
+    isItLiked = false;
+    likeSound.play();
+    dislike(a)
+  "
+>
+  <mat-icon #icon2 class="text-danger wp" color=""
+    >favorite</mat-icon
+  >
+</button>{{ perPerLikes }}
+<span *ngIf="perPerLikes == 1" (click)="goCheckIterations(realIterations)" class="border-end" style="padding-right: 3px;"> persona </span
+  ><span *ngIf="perPerLikes != 1" (click)="goCheckIterations(realIterations)" class="border-end" style="padding-right: 3px;"> persone </span>
+<span  style="padding-right: 3px;padding-left: 3px;" (click)="openCommentiCommenti(a)">Commenta</span>
+<span class="border-start" style="padding-left: 3px;" *ngIf="a.id  == utente.id ||
+a.id == utente.id" (click)="elimina(a)">Elimina</span>
+</div>
+  </div>
+
+</div>
+  </div>
+</div>
+<div class="p-3" *ngIf="commentiArray.length==0">
+<p class="m-auto">Non ci sono commenti ancora. Commenta tu!</p>
+</div>
+</div>
+<mat-spinner *ngIf="spinner==true" class="m-auto"></mat-spinner>
+<div class="p-2 m-auto fixed-bottom" mat-dialog-actions>
+  <form [formGroup]="commentaForm" (ngSubmit)="commentaPost(data[0])">
+    <div class="col-md-12 p-2">
+<div class="d-flex">
+  <textarea cols="30" rows="3" class="form-control m-auto shadow-sm" placeholder="Scrivi un commento" formControlName="textAC"
+ (click)="commentaForm.controls['textAC'].value=='Inserisci un commento con del testo'?commentaForm.controls['textAC'].setValue(null):''" (input)="sendValue()"></textarea>
+ <button class="bt" type="button" (click)="showEmoji=!showEmoji">😀</button>
+</div>
+<app-autocomplete [value]="value" (inputValue)="onUpdateCialogFormValue($event)"></app-autocomplete>
+<app-emoji *ngIf="showEmoji" (file)="onUpdateCialogFormValue($event)"></app-emoji>
+</div>
+     <div class="col-md-12 d-flex justify-content-end">
+       <button class="btn btn-primary" type="submit" >Commenta</button>
+     </div>
+   </form>
+
+</div>

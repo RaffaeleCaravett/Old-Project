@@ -1,0 +1,274 @@
+<div class="p-0 m-0 {{color}} {{text}} w-100"  style="min-height: 100%;" (mouseenter)="catch($event);arrayXLikesHover=[];
+seguitiXHover=[];
+tiSeguonoXHover=[]"
+>
+  <div class="row p-2" >
+    <div class="col-1"></div>
+    <div class="col-md-7 text-center p-1 pt-4">
+      <p class="fs-1">Condividi con gli altri:</p>
+      <div
+        class="form-floating pb-3 position-relative"
+        style="height: 50px"
+      >
+        <form [formGroup]="profiloForm">
+          <input
+            type="file"
+            class="d-none"
+            (change)="viewFileValue($event)"
+            #file
+            formControlName="immagineCaricata"
+            accept="image/png, image/gif, image/jpeg"
+          />
+          <button
+            mat-mini-fab
+            (click)="file.click()"
+            *ngIf="!variableImg"
+            class="position-absolute top-0 start-100"
+            type="button"
+            color="primary"
+            aria-label="Example icon button with a filter list icon"
+          >
+            <i class="material-icons">add_photo_alternate</i>
+          </button>
+          <button
+            mat-mini-fab
+            color="warn"
+            aria-label="Example icon button with a delete icon"
+            class="position-absolute top-0 start-100"
+            *ngIf="variableImg"
+            (click)="file.value = ''; variableImg = null"
+            type="button"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </form>
+      </div>
+      <div class="row d-flex flex-column-reverse" >
+        <div
+          *ngFor="let commentoPersonale of commentiPersonali" #divElements
+          class="p-2 border-bottom"
+        >
+          <div
+            (mouseenter)="
+              commentoPersonale.vediIterazioni=true;
+              showLikes(commentoPersonale)
+            "
+            (mouseleave)="
+              commentoPersonale.vediIterazioni=false;
+              hideLikes()
+            "
+          >
+            <div class="col-md-12 p-2">
+              <div class="row p-0">
+                <div class="col-3">
+                  <img
+                    src="{{
+                      commentoPersonale.immagineDiChiCondivide ||
+                        commentoPersonale.immagine
+                    }}"
+                    (mouseenter)="
+                      tryToOpenThisDialog($event, commentoPersonale)
+                    "
+                    alt="immagine profilo"
+                    class="border rounded-circle mw-stories"
+                    *ngIf="commentoPersonale.storia&&commentoPersonale.storia==true"
+                  />
+                  <img
+                  src="{{
+                    commentoPersonale.immagineDiChiCondivide ||
+                      commentoPersonale.immagine
+                  }}"
+                  (mouseenter)="
+                    tryToOpenThisDialog($event, commentoPersonale)
+                  "
+                  alt="immagine profilo"
+                  class="border rounded-circle mw"
+                  *ngIf="!commentoPersonale.storia||commentoPersonale.storia==false"
+                />
+                </div>
+                <div class="col-8 p-0 m-0 d-flex justify-content-start">
+                  <div class="row p-0 m-0">
+                    <div class="col-md-12 d-flex justify-content-start">
+                      <p class="fs-4" *ngIf="commentoPersonale.titolo">
+                        {{ commentoPersonale.nomeDiChiCondivide }}
+                      </p>
+                      <p class="fs-4" *ngIf="commentoPersonale.commento">
+                        {{ commentoPersonale.nome }}
+                      </p>
+                    </div>
+                    <div class="col-md-12 d-flex justify-content-start position-relative" style="top: -10px;">
+                      <p class="text-muted">
+                        {{
+                          commentoPersonale.dataDellaCondivisione ||
+                            commentoPersonale.data
+                        }}
+                        <i class="material-icons text-danger">date_range</i>
+                      </p>
+                    </div>
+                    <div class="col-md-12 d-flex justify-content-start position-relative" style="top:-10px;" *ngIf="commentoPersonale.song && commentoPersonale.song!=' '">
+                      <img src="../../../../assets/musica/25705.svg" alt="note_music" class="border rounded shadow-sm" style="width:25px;height:25px" >
+                      <span class="p-1">{{commentoPersonale.song.name}}</span>
+                  <audio controls class="p-2 d-none" [src]=" commentoPersonale.song.sound" #audio></audio>
+                  <i class="material-icons" *ngIf="volume" (click)="setVolume(audio)">volume_up</i>
+                  <i class="material-icons" *ngIf="!volume" (click)="setVolume(audio)">volume_off</i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-1">
+                  <button mat-button [matMenuTriggerFor]="menu">...</button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="openDialog(commentoPersonale)">
+                      <mat-icon class="text-primary wp">share</mat-icon>Condividi</button>
+                    <button mat-menu-item  *ngIf="
+                    commentoPersonale.id ||
+                    commentoPersonale.idDiChiCondivide == utente.id
+                  " (click)="modify(commentoPersonale,'modifica')"><i class="material-icons">mode</i> Modifica</button>
+                  <button mat-menu-item  *ngIf="
+                  commentoPersonale.id ||
+                  commentoPersonale.idDiChiCondivide == utente.id
+                " (click)="modify(commentoPersonale,'elimina')"><i class="material-icons">delete</i> Elimina</button>
+                  </mat-menu>
+                </div>
+              </div>
+            </div>
+            <div class="position-relative img-postata m-auto text-white">
+              <div class="img-postata rounded position-relative">
+                 <img
+                src="{{ commentoPersonale.immaginePostata }}"
+                alt="immagine postata"
+                class="img-postata rounded border"
+              />
+              <div *ngIf="commentoPersonale.text" class="position-absolute" [style.color]="commentoPersonale.text[1]" [style.fontSize]="commentoPersonale.text[2]+'px'"
+              [style.left]="commentoPersonale.text[3][0]+'px'||'0px'" [style.top]="commentoPersonale.text[3][1]+'px'||'0px'">
+                {{commentoPersonale.text[0]}}
+              </div>
+              </div>
+              <div
+                class="position-absolute top-0 start-0 w-100 row"
+                *ngIf="
+                  commentoPersonale.immagineDelCommentoCondiviso != '' &&
+                  commentoPersonale.immagineDelCommentoCondiviso != null
+                "
+              >
+                <div class="col-3 p-2">
+                  <i class="material-icons p-2 ">share</i>
+                  <img
+                    src="{{ commentoPersonale.immagineDelCommentoCondiviso }}"
+                    alt="img"
+                    style="width: 40px; height: 40px"
+                    class="border border-dark rounded-circle"
+                  />
+                </div>
+                <div class="col-9 fw-bold pt-2 text-start">
+                  <p>{{ commentoPersonale.nomeDelCommentoCondiviso }}</p>
+                  <p>{{ commentoPersonale.dataDelCommentoCondiviso }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 p-2 text-start m-auto" style="width: 450px">
+             <span class="fw-bolder" *ngIf="commentoPersonale.nomeDiChiCondivide!=null">{{ commentoPersonale.nomeDiChiCondivide}} </span>
+             <span class="fw-bolder" *ngIf="commentoPersonale.nomeDi==null">{{commentoPersonale.nome}}</span>
+              {{ commentoPersonale.commento || commentoPersonale.titolo }}
+            </div>
+            <div class="col-md-12 p-1 mt-1">
+              <div
+                class="row m-auto"
+                *ngIf="commentoPersonale.vediIterazioni == true"
+              >
+                <div class="col-6">
+                  <div>
+                    <button
+                      class="btn p-0 m-0"
+                      *ngIf="isItLiked == false"
+                      (click)="
+                        isItLiked = true;
+                        likeSound.play();
+                        like(commentoPersonale)
+                      "
+                    >
+                      <mat-icon #icon1 class="text-danger wp"
+                        >favorite_border</mat-icon
+                      >
+                    </button>
+                    <button
+                      class="btn p-0 m-0"
+                      *ngIf="isItLiked == true"
+                      (click)="
+                        isItLiked = false;
+                        likeSound.play();
+                        dislike(commentoPersonale)
+                      "
+                    >
+                      <mat-icon #icon2 class="text-danger wp" color=""
+                        >favorite</mat-icon
+                      >
+                    </button> {{ perPerLikes }}
+                    <span *ngIf="perPerLikes == 1" (click)="goCheckIterations(realIterations)"> persona </span
+                    ><span *ngIf="perPerLikes != 1" (click)="goCheckIterations(realIterations)"> persone </span>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <button class="btn p-0 m-0">
+                    <mat-icon
+                      class="text-secondary wp"
+                      (click)="goCheckCommenti(commentoPersonale,commentiAiPosts,utente)"
+                      >comment</mat-icon
+                    >
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 p-5">
+      <div class="row text-center" *ngIf="utente">
+        <div class="col-12">
+          <div
+            class="rounded-circle m-auto"
+            [ngClass]="{ stories: AreThereStories }"
+            (click)="goCheckStories()"
+          >
+            <img
+              src="{{ utente.avatar }}"
+              alt="Immagine del profilo"
+              class="rounded-circle img50 border border-light"
+            />
+          </div>
+          <div class="rounded-circle m-auto">
+            <div class="position-relative widthLikeImage">
+              <div class="position-absolute top-0 start-50 translate-middle">
+                <button
+                  mat-mini-fab
+                  color="primary"
+                  aria-label="Example icon button with a filter list icon"
+                  (click)="addStories()"
+                >
+                  <i class="material-icons">add</i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 m-auto">
+          <h2>{{ utente.nome }} {{ utente.cognome }}</h2>
+        </div>
+      </div>
+      <div class="row pt-5 p-1 text-center">
+        <div class="col-md-6 p-2">Impostazioni</div>
+        <div class="col-md-6 p-2">Sedi</div>
+        <div class="col-md-6 p-2">Lavora con noi</div>
+        <div class="col-md-6 p-2">Su di noi</div>
+        <div class="col-md-6 p-2">Affiliati</div>
+        <div class="col-md-6 p-2">Eventi</div>
+        <div class="col-md-6 p-2">Capitale</div>
+        <div class="col-md-12 p-1 text-primary fw-bolder bg-white rounded">
+          Your place
+          <span class="text-dark fw-bolder"> - Your place Corporation ®</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>

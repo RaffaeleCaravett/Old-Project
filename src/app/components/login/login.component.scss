@@ -1,0 +1,55 @@
+.btn{
+  width:30%;
+}
+a{
+  text-decoration: none;
+}
+.bg-light{
+  -webkit-box-shadow: 3px 3px 3px 3px #0d6efd;
+    -moz-box-shadow: 3px 3px 3px 3px #0d6efd;
+    box-shadow: 0 0 .1rem #fff,
+            0 0 .1rem #fff,
+            0 0 1rem #0d6efd,
+            0 0 0.5rem #0d6efd,
+            0 0 2rem #0d6efd,
+            inset 0 0 1rem #0d6efd;
+    width: 400px;
+    height: 500px;
+}
+.text-white{
+  text-shadow:#0d6efd 1px 0 10px;
+}
+.form-control{
+  border:none;
+ border-bottom: 1px solid #0d6efd;
+  &:focus{
+  box-shadow: none;
+  }
+}
+.button{
+  display: inline-block;
+  color: #0d6efd;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0 0 15px #0d6efd;
+}
+.border-fluo{
+  -webkit-box-shadow: 3px 3px 3px 3px #0d6efd;
+    -moz-box-shadow: 3px 3px 3px 3px #0d6efd;
+    box-shadow: 0 0 .1rem #fff,
+            0 0 .1rem #fff,
+            0 0 1rem #0d6efd,
+            0 0 0.5rem #0d6efd,
+            0 0 2rem #0d6efd,
+            inset 0 0 1rem #0d6efd;
+}
+/*creating animation effect*/
+.button:hover {
+  color: white;
+  background: #0d6efd;
+  box-shadow: 0 0 20px white;
+}
+

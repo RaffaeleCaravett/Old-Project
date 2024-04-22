@@ -1,0 +1,129 @@
+<div class="p-0 m-0 {{color}} {{text}} w-100">
+  <div class="row">
+    <div class="col-md-4 p-3">
+      <div class="border rounded shadow-sm bg-light text-center p-0 mb-2">
+        <p class="fs-3  p-3 bg-primary rounded-top text-white">Utenti totali</p>
+        <p class="fs-1 pt-3">{{ data.length }}</p>
+      </div>
+      <div class="border rounded shadow-sm bg-light text-center p-0 mb-2 ">
+        <p class="fs-3 p-3 bg-danger rounded-top text-white">Data Creazione</p>
+        <p class="fs-1 pt-3">04/2023</p>
+      </div>
+      <div class="border rounded shadow-sm bg-light text-center p-0 mb-2">
+        <p class="fs-3  p-3 bg-success rounded-top text-white">Online</p>
+        <p class="fs-1 pt-3">{{ nowOnline.length }}</p>
+      </div>
+      <div class="border rounded shadow-sm bg-light text-center p-0 mb-2">
+        <p class="fs-3  p-3 bg-warning rounded-top text-white">Visite totali</p>
+        <p class="pt-3 fs-1" >{{ totalVisitors.length }}</p>
+      </div>
+    </div>
+    <div class="col-md-8 p-3">
+      <div class="border rounded shadow-sm bg-light text-center p-3 overflow-scroll">
+        <p class="fs-3">Statistiche generali</p>
+        <div class="p-2">
+          <div echarts [options]="option" [autoResize]="false"></div>
+        </div>
+      </div>
+    </div>
+    <div class="p-3 col-md-12 ">
+      <div class="text-center p-3 bg-light border rounded shadow-sm overflow-scroll">
+        <mat-form-field>
+          <input
+            matInput
+            #filter
+            (input)="applyFilter(filter.value)"
+            class="m-auto"
+            placeholder="Cerca"
+          />
+        </mat-form-field>
+        <div *ngIf="dataSource">
+          <table mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="Immagine del Profilo">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                Immagine del Profilo <i class="material-icons text-primary">photo_camera</i>
+              </th>
+              <td mat-cell *matCellDef="let user">
+                <img
+                  src="{{ user.avatar }}"
+                  alt="imgProfilo"
+                  class="rounded-circle w"
+                />
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="Nome">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome <i class="material-icons text-warning p-2">person</i></th>
+              <td mat-cell *matCellDef="let user">{{ user.nome }}</td>
+            </ng-container>
+            <ng-container matColumnDef="Cognome">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Cognome <i class="material-icons text-warning p-2">person</i></th>
+              <td mat-cell *matCellDef="let user">{{ user.cognome }}</td>
+            </ng-container>
+            <ng-container matColumnDef="Data di nascita">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                Data di nascita <i class="material-icons text-success p-2">date_range</i>
+              </th>
+              <td mat-cell *matCellDef="let user">{{ user.dataDiNascita }}</td>
+            </ng-container>
+            <ng-container matColumnDef="Luogo di nascita">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                Luogo di nascita <i class="material-icons text-danger p-2">place</i>
+              </th>
+              <td mat-cell *matCellDef="let user">{{ user.luogoDiNascita }}</td>
+            </ng-container>
+            <ng-container matColumnDef="Interessi">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                Interessi <i class="material-icons text-danger p-2">interests</i>
+              </th>
+              <td mat-cell *matCellDef="let user">{{ user.interessi }}</td>
+            </ng-container>
+            <ng-container matColumnDef="Professione">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                Professione <i class="material-icons text-success p-2">work</i>
+              </th>
+              <td mat-cell *matCellDef="let user">{{ user.profesione }}</td>
+            </ng-container>
+            <ng-container matColumnDef="Sesso">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Sesso</th>
+              <td mat-cell *matCellDef="let user" ><span *ngIf="user.sesso=='M'">{{ user.sesso }} <i class="material-icons text-primary p-2">male</i></span>
+              <span *ngIf="user.sesso=='F'">
+                {{ user.sesso }} <i class="material-icons p-2" style="color:pink">female</i>
+              </span>
+              <span *ngIf="user.sesso=='T'">
+                {{ user.sesso }} <i class="material-icons text-danger p-2">transgender</i>
+              </span></td>
+            </ng-container>
+            <ng-container matColumnDef="Stato">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Stato <i class="material-icons text-secondary p-2">group</i></th>
+              <td mat-cell *matCellDef="let user">{{ user.stato }}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: displayedColumns"
+              style="height: 60px"
+            ></tr>
+          </table>
+        </div>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+        </mat-paginator>
+      </div>
+    </div>
+    <div class="col-md-6 p-3">
+      <div class="border rounded shadow-sm bg-light text-center p-3 overflow-scroll">
+        <p class="fs-3">Grafico statistiche personali</p>
+        <div class="p-2">
+          <div echarts [options]="option1" [autoResize]="false"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 p-3">
+      <div class="border rounded shadow-sm bg-light text-center p-3 overflow-scroll">
+        <p class="fs-3">Numeri generali</p>
+        <div class="p-2">
+          <div echarts [options]="option2" [autoResize]="false"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

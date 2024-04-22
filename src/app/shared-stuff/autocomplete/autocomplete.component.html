@@ -1,0 +1,7 @@
+<input type="text"  #input class="d-none" [value]="value" style="height: 1px;">
+<div *ngIf="paroleFrequenti" class="row" style="width: 180px;">
+<div class="col-md-6" *ngFor="let p of paroleFrequenti,index as i" style="font-size: 12px;" (click)="updateInput(p);paroleFrequenti=[]">
+ {{i<=3?p:''}}
+</div>
+
+</div>

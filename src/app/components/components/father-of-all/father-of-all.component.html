@@ -1,0 +1,30 @@
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="large"
+  color="#fff"
+  type="line-spin-clockwise-fade"
+>
+  <p style="font-size: 30px; color: white">Loading...</p>
+</ngx-spinner>
+<mat-drawer-container class="example-container" >
+  <mat-drawer mode="side" opened  style="width:20%"><app-navbar (OnChangeString)="changeString($event)" (visit)="onReceiveVisit($event)" [cerca]="cercaInDrawerContent"
+    (idKeyDaVisitare)="receiveIdKeyDaVisitare($event)" (idKeyDiChiVisita)="receiveIdKeyDiChiVisita($event)" [notifiche]="notifiche" [notificheDaLeggere]="notificheDaLeggere"
+     [notificheLette]="notificheLette" [utente]="utente" (color)="receiveColor($event)"
+    [imgUtente]="urlXImgNav"></app-navbar>
+</mat-drawer>
+  <mat-drawer-content (click)="changeCercaInDrawerContent()" style="background-color: color;">
+    <app-home *ngIf="string=='Home'" (profile)="changeString($event)" (visit)="onReceiveVisit($event)"
+    (idKeyDaVisitare)="receiveIdKeyDaVisitare($event)" (idKeyDiChiVisita)="receiveIdKeyDiChiVisita($event)"
+    (urlPerImmagineNavbar)="receiveurlPerImmagineNavbar($event)" [utente]="utente" [data]="data" [meseInLettere]="meseInLettere" [color]="color" [text]="text" [songs]="songs"
+    ></app-home>
+<app-profilo *ngIf="string=='Profilo'" [utente]="utente" [data]="data" [meseInLettere]="meseInLettere" (profile)="changeString($event)" (visit)="onReceiveVisit($event)"
+(idKeyDaVisitare)="receiveIdKeyDaVisitare($event)" (idKeyDiChiVisita)="receiveIdKeyDiChiVisita($event)" [color]="color" [text]="text" [songs]="songs"></app-profilo>
+<app-visit-profiles *ngIf="string=='visitProfile'&&visit=='ok'" [utenteCheVisita]="utente"  (profile)="changeString($event)"
+(visit)="onReceiveVisit($event)" (idKeyDaVisitare)="receiveIdKeyDaVisitare($event)" (idKeyDiChiVisita)="receiveIdKeyDiChiVisita($event)"
+ [idPerRicerca]="savedIdForSeach" [idDiChiVisita]="savedIdOfWhoVisit"  [data]="data" [meseInLettere]="meseInLettere" [color]="color" [text]="text" [songs]="songs"></app-visit-profiles>
+<app-chat-con-utenti *ngIf="string=='Chat'" [user]="utente" [idPerDatiUtente]="savedIdOfWhoVisit" [color]="color" [text]="text"></app-chat-con-utenti>
+<app-stats *ngIf="string=='Statistiche'" [user]="utente" [color]="color" [text]="text"></app-stats>
+</mat-drawer-content>
+</mat-drawer-container>
+
+<audio src="{{item.sound}}" #audio *ngFor="let item of songs"></audio>

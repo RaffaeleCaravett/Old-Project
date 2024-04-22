@@ -1,0 +1,61 @@
+::ng-deep.mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: var(--mdc-dialog-container-shape, var(--mdc-shape-medium, 4px));
+  text-align: center;
+}
+::ng-deep.mat-mdc-dialog-actions {
+  justify-content: center;
+}
+.width{
+  height:30px;
+  width: 30px;
+}
+.width-fluo{
+  height:30px;
+  width: 30px;
+  -webkit-box-shadow: 3px 3px 3px 3px #0d6efd;
+  -moz-box-shadow: 3px 3px 3px 3px #0d6efd;
+  box-shadow: 0 0 .1rem #fff,
+          0 0 .1rem #fff,
+          0 0 1rem #0d6efd,
+          0 0 0.5rem #0d6efd,
+          0 0 2rem #0d6efd,
+          inset 0 0 1rem #0d6efd;
+}
+.bg-personal{
+  background-color: lightgrey;
+}
+.mat-typography p {
+  margin: 0 0 12px;
+  height: 30px;
+  width: 62px;
+  padding: 3px;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #eee;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #0077ff;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #008cff;
+}
+.img-profilo{
+  width: 120px;
+  height: 120px;
+}
+button.bt{
+  border: none;
+  background: transparent;
+  position: relative;
+  top: -8px;
+}

@@ -1,0 +1,13 @@
+
+<div style="height:100%;width:100%" class="position-relative">
+  <div class="position-absolute top-50 start-50 translate-middle ">
+    <label for="input">Cosa scrivi?</label>
+    <input type="text"  id="input" class="form-control border border-dark" #input placeholder="ES: Ciao!" [style.font-size.px]="fontSize||12" [style.color]="selectedColor">
+    <label for="size">Grandezza del testo:</label>
+    <input type="text" id="size" class="form-control border border-dark"  (input)="fontSize=size.value" #size placeholder="ES: 12">
+    <label for="color">Colore del testo:</label>
+    <input (click)="changeWidth=!changeWidth;setWidth()" [(colorPicker)]="selectedColor"   (colorPickerChange)="colorChanged($event)" id="color" class="form-control border border-dark">
+  </div>
+<button class="m-2 btn btn-primary position-absolute bottom-0 end-0" (click)="closeDialog(input.value,size.value,selectedColor)">Aggiungi testo</button>
+</div>
+

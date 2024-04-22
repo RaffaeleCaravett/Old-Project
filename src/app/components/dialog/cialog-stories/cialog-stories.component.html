@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-md-12 text-center" mat-dialog-title>
+    <h2>Condividi la tua storia</h2>
+  </div>
+</div>
+<div class="row pt-2" mat-dialog-content style="height: 65%">
+  <div class="row">
+    <form [formGroup]="cialogForm" (ngSubmit)="cialogSubmit()">
+      <div class="col-md-12 border rounded text-center">
+        <div class="d-flex">
+          <input
+          class="form-control"
+          formControlName="textA"
+          placeholder="Scrivi un pensiero... "
+          (input)="sendValue()"
+        />
+        <img
+          *ngIf="variableImg"
+          src="{{ variableImg }}"
+          alt="imgCaricata"
+          class="rounded"
+        />
+        <input
+          type="file"
+          class="d-none"
+          (change)="viewFileValue($event)"
+          #file
+          formControlName="file"
+          accept="image/png, image/gif, image/jpeg"
+        />
+        <button class="bt" type="button" (click)="showEmoji=!showEmoji">😀</button>
+        </div>
+        <app-autocomplete [value]="value" (inputValue)="onUpdateCialogFormValue($event)"></app-autocomplete>
+        <app-emoji *ngIf="showEmoji" (file)="onUpdateCialogFormValue($event)"></app-emoji>
+        <div class="col-md-12 p-1">
+          <button class="btn" (click)="file.click()" type="button">
+            <i class="material-icons">add</i>
+          </button>
+        </div>
+      </div>
+      <button type="submit" class="d-none" #btn></button>
+    </form>
+  </div>
+</div>
+<div
+  mat-dialog-actions
+  class="col-md-12 d-flex justify-content-end p-1 sticky-bottom"
+>
+  <button class="btn btn-danger m-1" (click)="onNoClick()">Annulla</button>
+  <button class="btn btn-primary" type="button" (click)="btn.click()">
+    Condividi
+  </button>
+</div>

@@ -1,0 +1,40 @@
+<div mat-dialog-title class="text-center">Stai pubblicando questo post</div>
+<div mat-dialog-content class="text-center">
+  <p class="p-1"><i class="material-icons">music_note</i> <span *ngIf="!res" (click)="choseAudio()">Aggiungi musica </span> <span *ngIf="res" (click)="choseAudio()">{{res.name}} </span>
+    <span *ngIf="res" ><i class="material-icons" (click)="res=undefined">delete</i></span>
+   <span class="pl-2"><i class="material-icons" (click)="openTextDialog()">text_fields</i></span>
+  </p>
+  <div class="parent m-auto" (mousedown)="dragStart($event)" (mousemove)="dragMove($event)" (mouseup)="dragEnd($event)">
+     <img
+    src="{{ variableImg }}"
+    alt="Immagine caricata"
+    class="immagine-postata rounded border"
+  />
+    <div class="draggable" [ngStyle]="draggableStyle" [style.fontSize.px]="fontSize" [style.color]="color">
+      {{text||''}}
+    </div>
+  </div>
+  </div>
+  <div class="row text-start m-auto pt-2">
+    <div class="fw-bold col-md-5">{{utente.nome}} {{utente.cognome}} </div>
+    <div class="col-md-7">
+      <p class="d-flex"><input
+    type="text"
+    class="form-control mb-3 border-none text-start"
+    #title
+    placeholder="Aggiungi una descrizione"
+    (input)="sendValue()"
+  />
+  <button class="bt" type="button" (click)="showEmoji=!showEmoji">😀</button></p>
+  <app-autocomplete [value]="value" (inputValue)="onUpdateCialogFormValue($event)"></app-autocomplete>
+  <app-emoji *ngIf="showEmoji" (file)="onUpdateCialogFormValue($event)"></app-emoji>
+</div>
+  </div>
+
+
+<div mat-dialog-actions align="end">
+  <button class="btn btn-light m-1" (click)="onNoClick()">Chiudi</button>
+  <button class="btn btn-light m-1" (click)="close(title.value, variableImg,res||' ',[text,color,fontSize,positionValues])">
+    Condividi
+  </button>
+</div>
